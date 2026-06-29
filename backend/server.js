@@ -4,12 +4,20 @@ const sequelize = require('./config/db');
 
 const User = require('./models/User');
 const EmergencyRequest = require('./models/EmergencyRequest');
+const EmergencyAnalysis = require('./models/EmergencyAnalysis');
+const requestRoutes = require('./routes/requestRoutes');
+
 
 const app = express();
 app.use(cors());
 app.use(express.json());
 
+const adminRoutes = require('./routes/adminRoutes');
+app.use('/api/admin', adminRoutes);
+
+
 const authRoutes = require('./routes/authRoutes');
+app.use('/api/requests', requestRoutes);
 
 // Mount routes below app.use(express.json());
 app.use('/api/auth', authRoutes);
